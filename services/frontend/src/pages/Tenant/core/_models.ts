@@ -1,0 +1,17 @@
+export interface Tenant {
+    id: number,
+    name: string,
+    contact: string,
+    email: string,
+    isActive: boolean,
+    organization_id: number,
+    organization_name: string,
+    property_id: number,
+    property_name: string,
+    property_part_id: number,
+    property_part_name: string,
+    rent_amount: number,
+    contract_start_date: Date,
+    contract_end_date: Date,
+    tds_applicable: boolean,
+}

@@ -1,0 +1,95 @@
+# 🟢 Backend API Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization-management-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: organization-management
+  template:
+    metadata:
+      labels:
+        app: organization-management
+    spec:
+      containers:
+        - name: organization-management
+          image: nilesh/organization-management
+          env:
+            - name: DB_HOST
+              value: "organization-management-database-service"  # ✅ Database Service Name
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: "nilesh"
+            - name: DB_PASS
+              value: "password"
+            - name: DB_NAME
+              value: "organization_management"
+          ports:
+            - containerPort: 3005
+          #imagePullPolicy: IfNotPresent
+
+---
+# 🟢 Backend API Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: organization-management-service
+spec:
+  selector:
+    app: organization-management
+  ports:
+    - name: organization-management
+      protocol: TCP
+      port: 3005
+      targetPort: 3005
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization-management-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: organization-management-database
+  template:
+    metadata:
+      labels:
+        app: organization-management-database
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: nilesh@root
+            - name: MYSQL_DATABASE
+              value: organization_management
+            - name: MYSQL_USER
+              value: nilesh
+            - name: MYSQL_PASSWORD
+              value: password
+          ports:
+            - containerPort: 3306
+          args:
+            - "--default-authentication-plugin=mysql_native_password"
+            - "--ssl=0"
+            - "--skip-ssl"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: organization-management-database-service
+spec:
+  selector:
+    app: organization-management-database
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306

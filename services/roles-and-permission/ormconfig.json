@@ -1,0 +1,12 @@
+{
+    "type": "mysql",
+    "host": "organization-management-database-service",
+    "port": 3306,
+    "username": "nilesh",
+    "password": "password",
+    "database": "organization_management",
+    "synchronize": true,
+    "logging": false,
+    "entities": ["src/entities/**/*.ts"]
+  }
+  

@@ -1,0 +1,11 @@
+{
+  "type": "mysql",
+  "host": "tds-management-database-service",
+  "port": 3306,
+  "username": "nilesh",
+  "password": "password",
+  "database": "tds_management",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/entities/**/*.ts"]
+}

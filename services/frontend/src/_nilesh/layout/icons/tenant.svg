@@ -1,0 +1,20 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 48 48"
+    fill="currentColor"
+  >
+    {/* House */}
+    <path d="M46.34 20.52l-21-19a2 2 0 0 0-2.68 0l-21 19a2 2 0 1 0 2.68 3L24 5.7 43.66 23.48a2 2 0 0 0 2.68-3Z" />
+    <path d="M42 26a2 2 0 0 0-2 2V43H8V28a2 2 0 0 0-4 0V45a2 2 0 0 0 2 2H42a2 2 0 0 0 2-2V28a2 2 0 0 0-2-2Z" />
+
+    {/* User Icon - Head */}
+    <circle cx="24" cy="30" r="5" fill="currentColor" />
+
+    {/* User Icon - Body */}
+    <path
+      d="M18 40c0-4 3-6 6-6s6 2 6 6v4H18v-4z"
+      fill="currentColor"
+    />
+  </svg>

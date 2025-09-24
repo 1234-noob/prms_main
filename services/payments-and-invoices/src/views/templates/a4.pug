@@ -1,0 +1,66 @@
+//- doctype html
+//- html
+//-   head
+//-     - const invoiceTitle = (template.custom_labels && template.custom_labels.invoice) || 'Invoice'
+//-     title= invoiceTitle
+//-     style.
+//-       body {
+//-         font-family: #{template.font_family || 'Arial'};
+//-         color: #{template.primary_color || '#000'};
+//-         padding: 20px;
+//-         background-image: url("#{template.receipt_background_url}");
+//-         background-size: cover;
+//-       }
+//-   body
+//-     if template.logo_url
+//-       img(src=template.logo_url, height="60")
+
+//-     h1= invoiceTitle
+
+//-     p(style="font-weight: bold") #{template.custom_labels && template.custom_labels.client || 'Client'}: #{invoice.tenant_name}
+//-     p Amount: ₹#{invoice.amount}
+//-     p Status: #{invoice.status}
+//-     p #{template.custom_labels && template.custom_labels.date || 'Date'}: #{invoice.due_date}
+
+//-     if template.show_qr_code
+//-       img(src='https://dummyimage.com/200x200/000/fff.png&text=QR+Code')
+
+//-     if template.footer_note
+//-       hr
+//-       p(style="font-size: 12px; color: #888")= template.footer_note
+
+
+
+
+doctype html
+html
+  head
+    - const invoiceTitle = (template.custom_labels && template.custom_labels.invoice) || 'Invoice'
+    title= invoiceTitle
+    style.
+      body {
+        font-family: #{template.font_family || 'Arial'};
+        color: #{template.primary_color || '#000'};
+        padding: 20px;
+        background-image: url("#{template.receipt_background_url}");
+        background-size: cover;
+      }
+  body
+    if template.logo_url
+      img(src=template.logo_url, height="60")
+
+    //- h1.style()= invoiceTitle
+
+    // Fixed section (branding, etc.)
+    //- p(style="font-weight: bold") #{template.custom_labels && template.custom_labels.client || 'Client'}: #{invoice.tenant_name}
+    //- p Status: #{invoice.status}
+
+    // ✅ Inject dynamic HTML body from DB
+    != htmlContent
+
+    if template.show_qr_code
+      img(src='https://dummyimage.com/200x200/000/fff.png&text=QR+Code')
+
+    if template.footer_note
+      hr
+      p(style="font-size: 12px; color: #888")= template.footer_note

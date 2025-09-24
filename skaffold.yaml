@@ -1,0 +1,44 @@
+apiVersion: skaffold/v1beta1
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./k8s/*
+build:
+  local:
+    push: false
+    useBuildkit: false  # Ensure traditional Docker build is used
+  artifacts:
+    - image: nilesh/organization-management
+      context: services/organization-management
+      docker:
+        dockerfile: Dockerfile
+      # sync:
+      #   manual:
+      #     - src: "src/**/*.ts"
+      #       dest: "."
+    - image: nilesh/property-management
+      context: services/property-management
+      docker:
+        dockerfile: Dockerfile
+      # sync:
+      #   manual:
+      #     - src: "src/**/*.ts"
+      #       dest: "."
+    - image: nilesh/tenant-management
+      context: services/tenant-and-contract
+      docker:
+        dockerfile: Dockerfile
+      # sync:
+      #   manual:
+      #     - src: "src/**/*.ts"
+      #       dest: "."
+profiles:
+  - name: local
+    build:
+      local:
+        push: false
+    deploy:
+      kubectl:
+        manifests:
+          - ./k8s/*

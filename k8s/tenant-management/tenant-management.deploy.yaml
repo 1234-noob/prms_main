@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant-management-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tenant-management
+  template:
+    metadata:
+      labels:
+        app: tenant-management
+    spec:
+      containers:
+        - name: tenant-management
+          image: nilesh/tenant-management
+          env:
+            - name: DB_HOST
+              value: "tenant-management-database-service"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: "nilesh"
+            - name: DB_PASS
+              value: "password"
+            - name: DB_NAME
+              value: "tenant_management"
+          ports:
+            - containerPort: 3007
+             #imagePullPolicy: IfNotPresent
+
+---
+# 🟢 Backend API Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant-management-service
+spec:
+  selector:
+    app: tenant-management
+  ports:
+    - name: tenant-management
+      protocol: TCP
+      port: 3007
+      targetPort: 3007
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant-management-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tenant-management-database
+  template:
+    metadata:
+      labels:
+        app: tenant-management-database
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: nilesh@root
+            - name: MYSQL_DATABASE
+              value: tenant_management
+            - name: MYSQL_USER
+              value: nilesh
+            - name: MYSQL_PASSWORD
+              value: password
+          ports:
+            - containerPort: 3306
+          args:
+            - "--default-authentication-plugin=mysql_native_password"
+            - "--ssl=0"
+            - "--skip-ssl"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant-management-database-service
+spec:
+  selector:
+    app: tenant-management-database
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306

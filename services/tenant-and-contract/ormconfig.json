@@ -1,0 +1,11 @@
+{
+  "type": "mysql",
+  "host": "tenant-management-database-service",
+  "port": 3306,
+  "username": "nilesh",
+  "password": "password",
+  "database": "tenant_management",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/entities/**/*.ts"]
+}

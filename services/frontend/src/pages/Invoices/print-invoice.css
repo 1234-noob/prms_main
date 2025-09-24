@@ -1,0 +1,302 @@
+
+.bg-yellow-100 { background-color: #fef3c7; }
+.text-yellow-700 { color: #b45309; }
+.bg-green-100 { background-color: #d1fae5; }
+.text-green-700 { color: #065f46; }
+.bg-red-100 { background-color: #fee2e2; }
+.text-red-700 { color: #b91c1c; }
+.bg-blue-100 { background-color: #dbeafe; }
+.text-blue-700 { color: #1d4ed8; }
+
+
+.modal-header-for-pdf {
+  display: none !important; 
+}
+
+
+
+@media print {
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  
+  .receipt-modal-container {
+    position: static !important;
+    background-color: transparent !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: unset !important;
+    height: auto !important; 
+  }
+
+
+  .receipt-modal-content {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    width: auto !important;
+    max-width: unset !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    max-height: unset !important;
+    min-height: 100vh; /* Ensure it takes at least one full page height */
+    display: block !important;
+  }
+
+  /* Area targeted by react-to-pdf */
+  .receipt-content-area {
+    overflow-y: visible !important;
+    max-height: unset !important;
+    flex-grow: unset !important;
+    padding: 15mm 10mm !important; /* Adjust overall padding around the content */
+    box-sizing: border-box;
+    width: 100% !important;
+    border: 1px solid #dddddd; /* Add a subtle border around the main content area if desired */
+  }
+
+  /* Hide action buttons for print */
+  .print-action-buttons {
+    display: none !important;
+  }
+
+  /* Hide the screen modal header controls (close button etc.) */
+  .modal-header-controls {
+    display: none !important; /* This hides the *other* "Invoice Receipt" title for print */
+  }
+
+  /* Styles for the "Invoice Receipt" title when printed */
+  .modal-header-for-pdf {
+    /* Use position: relative for parent to contain absolute child */
+    position: relative !important;
+    width: 100% !important; /* Ensure it takes full width for centering */
+    padding-top: 5mm !important; /* Reduced to move it higher */
+    padding-bottom: 5mm !important;
+    border-bottom: 1px solid #ccc !important;
+    margin-bottom: 8mm !important; /* Space between header and logo/company info */
+    /* Ensure no text-align from parent interferes with absolute child */
+    text-align: initial !important;
+    
+    display: block !important; /* Must be block to allow absolute positioning of child */
+  }
+
+  .modal-header-for-pdf h2 {
+    font-size: 24pt !important;
+    color: #333 !important;
+    margin: 0 !important; /* Remove any default margins that might interfere */
+
+    /* ABSOLUTE POSITIONING FOR CENTERING */
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important; /* Potentially needed for vertical alignment if parent has height */
+    transform: translate(-50%, -50%) !important; /* Center both horizontally and vertically */
+    white-space: nowrap !important; /* Prevent text wrapping, keep it on one line for centering */
+    
+    /* Make sure it's on top of any potential overlapping elements */
+    z-index: 10 !important;
+  }
+
+  /* Styles for the dark section titles (Rental Invoice, Bill To, Invoice Details, Total Amounts) */
+.bg-gray-800 {
+    page-break-after: avoid; /* Keep title with content below */
+    background-color: #1f2937 !important; /* Ensure dark background color prints */
+    color: #fff !important; /* Ensure white text prints */
+    margin-bottom: 0.5mm !important; /* Small space below the title bar */
+    
+    /* NEW/ADJUSTED: Set a fixed height for the bar */
+    height: 20px !important; /* Adjust this value to control the bar's overall vertical size. */
+                            /* Start with 20px, then try 18px or 22px if needed. */
+    padding: 0 !important; /* Remove any padding from the bar itself if height is fixed */
+    display: block !important; /* Ensure it's a block-level element */
+    overflow: hidden !important; /* Ensures content doesn't spill out if line-height is off */
+  }
+
+  .bg-gray-800 p {
+    text-align: center !important; /* Center the text horizontally */
+    padding: 0 !important; /* Remove any padding from the paragraph itself */
+    margin: 0 !important; /* Remove any default paragraph margins */
+    
+    /* NEW/ADJUSTED: Crucial for vertical centering within a fixed height parent */
+    line-height: 20px !important; /* Make line-height equal to the parent's height (20px) */
+    
+    font-size: 10pt !important; /* Ensure consistent font size, adjust if your text is larger/smaller */
+    /* If your original p has text-lg or text-base, ensure this matches the rendered size */
+    display: block !important; /* It should be block for text-align */
+    /* REMOVED: vertical-align, as it's ignored for display: block */
+  }
+
+  /* General table styling for print */
+  table {
+    page-break-inside: avoid; /* Keep table content together */
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 4mm !important; /* Add space after tables */
+    border: 1px solid #cccccc !important; /* Ensure outer table border */
+  }
+
+  table td, table th {
+    border: 1px solid #cccccc !important;
+    padding: 6px 8px !important;
+    vertical-align: top; /* Align content to the top of the cell */
+  }
+
+  /* List styling for print (Bill To section) */
+  ul {
+    page-break-inside: avoid;
+  }
+
+  .bill-to-list {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 10mm !important; /* Indent the list from the left edge */
+  }
+
+  .bill-to-list li {
+    position: relative;
+    padding-left: 5mm !important; /* Space for the bullet point */
+  }
+
+  .bill-to-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #333;
+    font-weight: bold;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Specific table styles for invoice-details-table */
+  .invoice-details-table thead th:first-child,
+  .invoice-details-table tbody tr td:first-child {
+      width: 40% !important; /* Give the label column a fixed width */
+  }
+
+  .invoice-details-table thead th:last-child,
+  .invoice-details-table tbody tr td:last-child {
+      width: 60% !important; /* Give the value column remaining width */
+  }
+
+  .invoice-details-table td {
+    white-space: normal !important; /* Allow text to wrap */
+  }
+
+  /* Specific adjustments for the status row to prevent overlap */
+  .invoice-status-row td:first-child { /* The 'Status:' label cell */
+      white-space: nowrap !important; /* Keep "Status:" label on one line */
+  }
+
+  .invoice-status-row td:last-child {
+    text-align: left !important;
+    width: auto !important; /* Let content determine width */
+    padding-left: 8px !important; /* Increase left padding slightly to ensure separation */
+    padding-right: 8px !important; /* Ensure sufficient right padding */
+  }
+  
+  /* --- IMPORTANT CHANGE FOR STATUS PILL --- */
+  /* Remove the background and just make the text green for print */
+  .invoice-status-row .text-sm.font-semibold {
+    display: inline !important; /* Change to inline to remove block/inline-block effects */
+    background-color: transparent !important; /* Remove background */
+    padding: 0 !important; /* Remove padding */
+    border-radius: 0 !important; /* Remove border-radius */
+    line-height: normal !important; /* Reset line-height to normal */
+    color: #065f46 !important; /* Explicitly set text color to green */
+    font-weight: bold !important; /* Keep font bold if desired */
+    white-space: nowrap !important; /* Keep text on one line */
+  }
+  /* --- END IMPORTANT CHANGE --- */
+
+
+  .invoice-details-table th,
+  .invoice-details-table td {
+    text-align: left !important;
+  }
+
+  .invoice-details-table tbody tr td:last-child {
+    text-align: left !important;
+  }
+
+  /* Font size adjustments for print */
+  h2 { font-size: 18pt !important; } /* General h2 size */
+  p, td, li, span { font-size: 9pt !important; }
+  .text-xs { font-size: 7pt !important; }
+  .text-sm { font-size: 8pt !important; }
+
+  /* Spacing and padding adjustments for print */
+  .pt-12 { padding-top: 10mm !important; }
+  .px-4 { padding-left: 5mm !important; padding-right: 5mm !important; }
+  .pb-4 { padding-bottom: 5mm !important; }
+  .pt-8 { padding-top: 5mm !important; }
+  .pb-20 { padding-bottom: 10mm !important; } /* Adjust as needed */
+
+  .p-1\.5 { padding: 3px 6px !important; } /* Fine-tune padding for general elements */
+  .p-2 { padding: 4mm !important; } /* Changed to mm for consistency */
+
+  /* Remove box shadows for print */
+  .shadow-xl {
+    box-shadow: none !important;
+  }
+
+  /* Margin adjustments for print */
+  .mb-4 {
+    margin-bottom: 5mm !important;
+  }
+  .mt-4 {
+    margin-top: 5mm !important;
+  }
+
+  /* Color overrides for print to ensure they render correctly */
+  .bg-gray-800 {
+    background-color: #1f2937 !important;
+    color: #fff !important;
+  }
+  /* Removed bg-green-100 from here as it's no longer needed for the pill background in print */
+  .bg-gray-100 {
+    background-color: #f3f4f6 !important;
+  }
+  
+  .text-gray-700 { color: #374151 !important; }
+  .text-gray-800 { color: #1f2937 !important; }
+  .text-gray-900 { color: #111827 !important; }
+  .border { border-color: #e5e7eb !important; }
+  .border-b { border-bottom-color: #e5e7eb !important; }
+  .border-t-2 { border-top-color: #9ca3af !important; }
+
+  /* Position of web icon (adjust as needed for absolute positioning in print) */
+  .absolute.bottom-4.right-4 {
+    position: absolute !important;
+    bottom: 10mm !important; /* Adjust from bottom edge */
+    right: 10mm !important; /* Adjust from right edge */
+  }
+
+  /* Border color consistency */
+  .border.border-gray-300 {
+    border-color: #cccccc !important;
+  }
+
+  .border-t-2.border-gray-400 {
+    border-top-color: #999999 !important;
+  }
+
+  /* Horizontal rule (separator line) adjustments */
+  hr.border-t-2.border-gray-400 {
+    height: 1px;
+    background-color: #999999;
+    border: none;
+    margin: 8mm 0 !important; /* Adjusted margin around the HR */
+  }
+
+  /* Ensuring content within a div.mb-4.border.border-gray-300.p-2 is well-spaced */
+  div.mb-4.border.border-gray-300.p-2 {
+      padding-top: 4mm !important;
+      padding-bottom: 4mm !important;
+      margin-bottom: 5mm !important; /* Consistent spacing after this block */
+  }
+}

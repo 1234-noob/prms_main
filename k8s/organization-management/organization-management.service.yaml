@@ -1,0 +1,14 @@
+apiVersion: v1 #NodePort Services
+kind: Service
+metadata:
+  name: organization-management-srv
+spec:
+  type: NodePort
+  selector:
+    app: organization-management
+  ports:
+    - name: organization-management
+      protocol: TCP
+      port: 3005
+      targetPort: 3005 #application port
+      nodePort: 32005

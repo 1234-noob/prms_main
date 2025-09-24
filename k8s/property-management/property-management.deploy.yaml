@@ -1,0 +1,95 @@
+# 🟢 Backend API Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: property-management-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: property-management
+  template:
+    metadata:
+      labels:
+        app: property-management
+    spec:
+      containers:
+        - name: property-management
+          image: nilesh/property-management
+          env:
+            - name: DB_HOST
+              value: "property-management-database-service"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: "nilesh"
+            - name: DB_PASS
+              value: "password"
+            - name: DB_NAME
+              value: "property_management"
+          ports:
+            - containerPort: 3006
+             #imagePullPolicy: IfNotPresent
+
+---
+# 🟢 Backend API Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: property-management-service
+spec:
+  selector:
+    app: property-management
+  ports:
+    - name: property-management
+      protocol: TCP
+      port: 3006
+      targetPort: 3006
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: property-management-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: property-management-database
+  template:
+    metadata:
+      labels:
+        app: property-management-database
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: nilesh@root
+            - name: MYSQL_DATABASE
+              value: property_management
+            - name: MYSQL_USER
+              value: nilesh
+            - name: MYSQL_PASSWORD
+              value: password
+          ports:
+            - containerPort: 3306
+          args:
+            - "--default-authentication-plugin=mysql_native_password"
+            - "--ssl=0"
+            - "--skip-ssl"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: property-management-database-service
+spec:
+  selector:
+    app: property-management-database
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Receipt</title>
+  <style>
+    body { font-family: Arial; padding: 40px; }
+    h2 { text-align: center; margin-bottom: 30px; }
+    .info { margin-bottom: 10px; }
+    .label { font-weight: bold; width: 150px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <h2>Receipt</h2>
+  <div class="info"><span class="label">Organisation Name:</span> <%= orgName  %></div>
+  <div class="info"><span class="label">Organisation Address:</span> <%= orgAddress %></div>
+  <div class="info"><span class="label">Receipt ID:</span> <%= receiptId %></div>
+  <div class="info"><span class="label">Invoice ID:</span> <%= invoiceId %></div>
+  <div class="info"><span class="label">Name:</span> <%= name %></div>
+  <div class="info"><span class="label">Service:</span> <%= serviceName %></div>
+  <div class="info"><span class="label">Amount Paid:</span> ₹<%= amount %></div>
+  <div class="info"><span class="label">Payment Date:</span> <%= date %></div>
+  <div class="info"><span class="label">Payment Mode:</span> <%= paymentMode %></div>
+
+</body>
+</html>
