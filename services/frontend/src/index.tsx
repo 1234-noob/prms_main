@@ -14,6 +14,9 @@ import { setupAxios } from "./app/modules/auth/core/AuthHelpers";
 import axios from 'axios';
 import * as AppRoutes from './app/routing/AppRoutes'
 import { ThemeProvider } from "./_nilesh/context/ThemeContext";
+import {ApolloProvider} from "@apollo/client/react"
+import client from "./apolloClient";
+// import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -24,6 +27,7 @@ root.render(
   <React.StrictMode>
 
     <QueryClientProvider client={queryClient}>
+    <  ApolloProvider client={client}>
 
       <ThemeProvider>
         <NileshI18nProvider>
@@ -35,6 +39,7 @@ root.render(
         <ReactQueryDevtools initialIsOpen={false} />
 
       </ThemeProvider>
+      </ApolloProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

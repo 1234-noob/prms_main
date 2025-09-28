@@ -15,6 +15,7 @@ import {
   PlugInIcon,
   TableIcon,
   UserCircleIcon,
+  DocsIcon,
   HelpIcon,
   WalletIcon,
   ContractIcon,
@@ -203,13 +204,20 @@ const adminItems :NavItem[] = [
       
 
     ],
-  },
-  {
+  }, {
     icon: <WalletIcon />,
     name: "Payment Tracking & TDS Management",
     subItems: [
       { name: "Payment Status", path: "/payment-status", pro: false },
       { name: "TDS Deductions & Reports", path: "/tds-deductions-reports", pro: false },
+    ],
+  },
+  {
+    icon: <DocsIcon/>,
+    name: "Reports & Analytics",
+    subItems: [
+      { name: "Reports", path: "/reports", pro: false },
+     
     ],
   },
   {

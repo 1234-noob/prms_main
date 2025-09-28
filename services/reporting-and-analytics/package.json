@@ -1,7 +1,7 @@
 {
   "name": "reporting-and-analytics",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
     "build": "tsc",

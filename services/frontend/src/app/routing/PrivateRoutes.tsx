@@ -26,6 +26,7 @@ import TenantsPage from "../../pages/Tenant/TenantsPage"
 import RentalAgreementsPage from "../../pages/RentalAgreements/RentalAgreementsPage"
 import HierarchyManagement from "../../pages/HierarchyManagement"
 import InvoiceTemplates from "../../pages/InvoiceTemplates"
+import ReportAndAnalyticsPage from "../../pages/Report And Analytics/ReportAndAnalyticsPage"
 
 
 
@@ -60,6 +61,7 @@ const PrivateRoutes = () => {
                 <Route path="/contact-management" element={<ContactManagementPage />} />
                 <Route path="/hierarchy" element={<HierarchyManagement />} />
                 <Route path="/Invoice-Templates" element={<InvoiceTemplates />} />
+                <Route path="/reports" element={<ReportAndAnalyticsPage/>}/>
             </Route>
         </Routes>
     )

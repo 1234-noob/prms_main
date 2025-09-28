@@ -50,6 +50,7 @@ import { ReactComponent as MailIcon } from "./mail-line.svg";
 import { ReactComponent as HorizontaLDots } from "./horizontal-dots.svg";
 import { ReactComponent as ChatIcon } from "./chat.svg";
 import { ReactComponent as MoreDotIcon } from "./more-dot.svg";
+import {ReactComponent as FileDown} from "./file-down.svg"
 
 export {
   DownloadIcon,
@@ -93,6 +94,7 @@ export {
   UserCircleIcon,
   TaskIcon,
   ListIcon,
+  FileDown,
   TableIcon,
   PageIcon,
   PieChartIcon,
