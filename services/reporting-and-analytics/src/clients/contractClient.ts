@@ -11,8 +11,15 @@ const contractClient = httpRequest(process.env.TENANT_SERVICE_URL!);
 
 
 export const getAllContracts = async () =>{
-    const response = await contractClient.get("/api/contracts");
+    try {
+        const response = await contractClient.get("/api/contracts");
+      
     return response.data;
+        
+    } 
+    catch (error) {
+      console.log(error)
+    }
 }
 
 

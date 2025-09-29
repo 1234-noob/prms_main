@@ -1,0 +1,32 @@
+{
+  "name": "error_logging_system",
+  "version": "1.0.0",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "nodemon --exec ts-node ./src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "kafkajs": "^2.2.4",
+    "logger": "^0.0.1",
+    "mysql2": "^3.14.5",
+    "node-cron": "^4.2.1",
+    "sequelize": "^6.37.7",
+    "winston": "^3.17.0"
+  }
+}

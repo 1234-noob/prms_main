@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 import { createApp } from "./app";
-import { getAllTenantPropertyParts } from "./clients/tenantClient";
+import { getAllOrganizations } from "./clients/organizationClient";
+
 
 
 const PORT = process.env.PORT

@@ -7,12 +7,17 @@ const organizationClient = httpRequest(process.env.ORG_SERVICE_URL!||"http://loc
 
 
 export const getAllOrganizations = async (isActive:boolean=true) => {
-    const response = await organizationClient.get("/api/organizations",{
+
+            const response = await organizationClient.get("/api/organizations",{
         params: { isActive }
     });
-  
+
+    
     
     return response.data;
+        
+    
+
 }
 
 export const getOrganizationById= async (id:number) =>{
