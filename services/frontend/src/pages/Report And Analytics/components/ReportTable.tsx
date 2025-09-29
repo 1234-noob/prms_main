@@ -130,9 +130,9 @@ const reportsData: ReportData[] = [
 
 export function ReportsTable() {
 
-    const { loading, error, data } = useQuery(TEST_QUERY)
-  
-    console.log(data);
+    
+
+
     
 
   return (

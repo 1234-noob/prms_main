@@ -106,4 +106,4 @@ const ReportAndAnalyticsPage = () => {
     );
 }
 
-export default ReportAndAnalyticsPage
+export default ReportAndAnalyticsPage;
